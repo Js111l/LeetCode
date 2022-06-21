@@ -1,17 +1,24 @@
 class Solution {
-   static public List<List<String>> suggestedProducts(String[] products, String searchWord) {
-
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
         Arrays.sort(products);
-
-        List<List<String>> list=new ArrayList<>();
+        
+        List<List<String>> res = new ArrayList<>();
         for (int i = 0; i < searchWord.length(); i++) {
+            String word = searchWord.substring(0,i+1);
+            List<String> list = new ArrayList<>();
+            for (String product : products) {
+                if (product.length() < word.length())
+                    continue;
+                if (list.size() >= 3)
+                    break;
+                String sub = product.substring(0,i+1);
+                if (word.equals(sub))
+                    list.add(product);
+            }
 
-            String prefix=searchWord.substring(0,1+i);
-            
-            list.add(Arrays.stream(products).filter(x->x.startsWith(prefix))
-                    .limit(3).collect(Collectors.toList()));
+            res.add(list);
         }
-        return list;
-
+        
+        return res;
     }
 }
