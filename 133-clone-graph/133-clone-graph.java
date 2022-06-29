@@ -18,30 +18,35 @@ class Node {
 }
 */
 
-
 class Solution {
     public Node cloneGraph(Node node) {
 
 return BFS(node);
     }
 
-     private Node BFS(Node node) {
-        HashMap<Node, Node> hMap = new HashMap<>();
-        Queue<Node> q = new LinkedList<>();
-        if(node != null) {
-            hMap.put(node, new Node(node.val));
-            q.add(node);
+    private Node BFS(Node node) {
+
+        HashMap<Node, Node> visited = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+
+        if(node!=null) {
+            visited.put(node, new Node(node.val));
+            queue.add(node);
+
         }
-        while(!q.isEmpty()) {
-            Node currNode = q.remove();
-            for(Node adj : currNode.neighbors) {
-                if(!hMap.containsKey(adj)) {
-                    hMap.put(adj, new Node(adj.val));
-                    q.add(adj);
+
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            for (Node neighbourNode:currentNode.neighbors
+            ) {
+                if(!visited.containsKey(neighbourNode)){
+                    visited.put(neighbourNode,new Node(neighbourNode.val));
+                    queue.add(neighbourNode);
                 }
-                hMap.get(currNode).neighbors.add(hMap.get(adj));
+                visited.get(currentNode).neighbors.add(visited.get(neighbourNode));
             }
         }
-        return hMap.get(node);
+
+        return visited.get(node);
     }
 }
