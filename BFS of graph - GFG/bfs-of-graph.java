@@ -35,33 +35,32 @@ class GFG {
 class Solution {
     public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
 
-        boolean[] visited = new boolean[V];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(0);
 
-        ArrayList<Integer> result = new ArrayList<>();
-
-        while (!queue.isEmpty()) {
-            int n = queue.poll();
-            if (!visited[n]) {
-                visited[n] = true;
-                result.add(n);
-                for (int i = 0; i < adj.get(n).size(); i++) {
-                    queue.add(adj.get(n).get(i));
+        
+            boolean [] visited =new boolean[V];
+            ArrayList<Integer> result=new ArrayList<>();
+            Queue<Integer> queue=new LinkedList<>();
+            queue.add(0);
+            
+            while (!queue.isEmpty()){
+                
+                int n= queue.poll();
+                
+                if(!visited[n]){
+                    visited[n]= true;
+                    result.add(n);
+                    for (int i=0;i<adj.get(n).size();i++){
+                        queue.add(adj.get(n).get(i));
+                    }
+                    
+                    
                 }
             }
-
-        }
-
-        return result;
-    }
+            
 
 
+return result;
+
+
+     }
 }
-
-
-
-
-
-
-
