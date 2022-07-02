@@ -40,10 +40,12 @@ class Solution {
         ArrayList<ArrayList<Integer>> adj1 = adj;
 
         boolean[] visited = new boolean[adj.size()];
-            DFSHELPER(0, visited, adj1);
-            return res;
+        for(int i=0;i<V;i++) {
+            if(!visited[i])
+            DFSHELPER(i, visited, adj1);
 
-        
+        }
+        return res;
 
     }
 
@@ -63,4 +65,3 @@ class Solution {
     }
 
 }
-
