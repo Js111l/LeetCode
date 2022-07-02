@@ -35,31 +35,32 @@ class GFG {
 
 class Solution {
     ArrayList<Integer> res = new ArrayList<>();
-    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
-        ArrayList<ArrayList<Integer>> adj1=adj;
 
-        boolean[] visited = new boolean[V];
-        DFSHELPER(0,visited,adj1);
-        return res;
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<ArrayList<Integer>> adj1 = adj;
+
+        boolean[] visited = new boolean[adj.size()];
+            DFSHELPER(0, visited, adj1);
+            return res;
+
         
 
-
     }
+
     void DFSHELPER(int n, boolean[] visited, ArrayList<ArrayList<Integer>> adj1) {
 
-            if (!visited[n]) {
-                visited[n]=true;
-                res.add(n);
-            }else {
-                return;
-            }
-            for(int i=0;i<adj1.get(n).size();i++){
-                DFSHELPER(adj1.get(n).get(i),visited,adj1);
-            }
+        if (!visited[n]) {
+            visited[n] = true;
+            res.add(n);
+        } else {
+            return;
+        }
+        for (int i = 0; i < adj1.get(n).size(); i++) {
+            DFSHELPER(adj1.get(n).get(i), visited, adj1);
+        }
 
-    
+
     }
 
 }
-
 
