@@ -47,10 +47,10 @@ class Solution {
         if (recStack[n]) {
             return true;
         }
-
-        if (visited[n]) {
+if (visited[n]) {
             return false;
         }
+       
         recStack[n] = true;
         visited[n] = true;
 
