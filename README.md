@@ -1,2 +1,2 @@
 # LeetCode
-Collection of LeetCode questions to improve coding skills!
+Collection of algorithmic problems to improve coding skills!
