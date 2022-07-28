@@ -21,9 +21,9 @@ class Solution {
     if(root.left==null&&root.right==null){
         stringBuilder.append(root.val);
         strings.add(stringBuilder.toString());
-    }
-    helper(root.right,strings,stringBuilder);
-    helper(root.left,strings,stringBuilder);
-    stringBuilder.setLength(l);
+    }        System.out.println(l);
+
+     helper(root.right,strings,new StringBuilder(stringBuilder));
+    helper(root.left,strings,new StringBuilder(stringBuilder));
     }
 }
