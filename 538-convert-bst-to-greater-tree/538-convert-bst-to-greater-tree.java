@@ -1,0 +1,65 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode convertBST(TreeNode root) {
+ if(root==null){
+        return null;
+    }
+        List<Integer> nodesValues = new ArrayList<>();
+        helperNodesVales(root, nodesValues);
+        traverseAndAdd(root, nodesValues);
+
+        return root;
+
+    }
+
+    private void helperNodesVales(TreeNode root, List<Integer> nodesValues) {
+        if (root != null) {
+            nodesValues.add(root.val);
+        }
+        if (root.right != null) {
+            helperNodesVales(root.right, nodesValues);
+        }
+        if (root.left != null) {
+            helperNodesVales(root.left, nodesValues);
+        }
+        if (root == null) {
+            return;
+        }
+    }
+
+    private void traverseAndAdd(TreeNode root, List<Integer> nodesValues) {
+        if (root != null) {
+            int rootVal= root.val;
+            for (int i = 0; i < nodesValues.size(); i++) {
+                if (nodesValues.get(i) > rootVal)
+                    root.val += nodesValues.get(i);
+            }
+            rootVal=0;
+
+        }
+        if (root.right != null) {
+            traverseAndAdd(root.right, nodesValues);
+        }
+        if (root.left != null) {
+            traverseAndAdd(root.left, nodesValues);
+        }
+        if (root == null) {
+            return;
+        }
+
+    }
+}
