@@ -13,32 +13,50 @@
  *     }
  * }
  */
-class Solution {
-    
-   private int maxLevel = 0;
-    private int sum = 0;
-    
-    public int deepestLeavesSum(TreeNode root) {
-        if(root == null) return 0;
-        calculateSumAtLevel(root,0);
-        return sum;
-        
-    }
-    
-    private void calculateSumAtLevel(TreeNode root,int level){
-        
-       if(root == null) return;
-        if(level > maxLevel){
-            sum = 0;
-            maxLevel = level;
-        }
-        if(level == maxLevel){
-            sum = sum + root.val;
-        }
-         System.out.println(level);
-                System.out.println(root.val);
 
-        calculateSumAtLevel(root.left,level+1);
-        calculateSumAtLevel(root.right,level+1);
+class Solution {
+    int l=0;
+    public int deepestLeavesSum(TreeNode root) {
+
+        int maxDepth=helper(root,1);
+       int s=0;
+        s=traverse(root,1,0,maxDepth);
+        return s;
+    }
+
+
+    private int helper(TreeNode root, int depth) {
+        if(root.left==null && root.right==null){
+            System.out.println(root.val);
+            return depth;
+
+        }
+        int l=0;
+        if(root.left!=null) {
+            l = helper(root.left, depth + 1);
+        }
+        int r=0;
+        if(root.right!=null) {
+            r = helper(root.right, depth + 1);
+        }
+
+        return Math.max(l,r);
+    }
+
+    private int traverse(TreeNode root, int depth, int sum, int maxDepth) {
+        if(root.left==null&&root.right==null&&depth==maxDepth){
+           return root.val;
+        }
+
+        int l=0;
+        if(root.left!=null){
+          l= traverse(root.left,depth+1,sum,maxDepth);
+        }
+        int r=0;
+        if(root.right!=null){
+           r=traverse(root.right,depth+1,sum,maxDepth);
+        }
+        return l+r;
     }
 }
+
