@@ -2,7 +2,7 @@
 class Solution {
     public int[] minOperations(String boxes) {
         int[] boxesArray = new int[boxes.length()];
-        
+    
         for (int i = 0; i < boxesArray.length; i++) {
                         boxesArray[i]=0;
             for (int j = 0; j < boxesArray.length; j++) {
