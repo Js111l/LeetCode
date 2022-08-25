@@ -8,7 +8,7 @@ class Solution {
                 if (j - i + 1 <= res.length()) {
                     break;
                 }
-                if (checkIfPalindrome(temp)) {
+                if (checkIfPalindrome(s,i,j)) {
                     res = temp;
                 }
             }
@@ -16,13 +16,13 @@ class Solution {
         return res;
     }
 
-    private boolean checkIfPalindrome(String temp) {
-
-        for (int i = 0; i < Math.floor(temp.length() / 2); i++) {
-            if (temp.charAt(i) != temp.charAt(temp.length() - i - 1)) {
+    private boolean checkIfPalindrome(String temp,int i,int j) {
+        while(i<j){
+            if(temp.charAt(i++)!=temp.charAt(j--)){
                 return false;
             }
         }
+        
         return true;
     }
 }
