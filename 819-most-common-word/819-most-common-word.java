@@ -1,25 +1,25 @@
-import java.util.*;
-import java.util.stream.Collectors;
 class Solution {
     public String mostCommonWord(String paragraph, String[] banned) {
-        paragraph=paragraph.replaceAll("[^a-zA-Z0-9]"," ");
-        paragraph=paragraph.replaceAll("\\s+",".");
-        String [] array =paragraph.split("[.]");
-        array= Arrays.stream(array).map(x->x.trim().toLowerCase(Locale.ROOT)).collect(Collectors.toList()).toArray(String[]::new);
-        Map<String,Integer> map=new HashMap<>();
-        Set<String> set= Arrays.stream(array).collect(Collectors.toSet());
-        for (String s :set) {
-            map.put(s,0);
+
+        // 1). replace the punctuations with spaces,
+        // and put all letters in lower case
+        String normalizedStr = paragraph.replaceAll("[^a-zA-Z0-9 ]", " ").toLowerCase();
+
+        // 2). split the string into words
+        String[] words = normalizedStr.split("\\s+");
+
+        Set<String> bannedWords = new HashSet();
+        for (String word : banned)
+            bannedWords.add(word);
+
+        Map<String, Integer> wordCount = new HashMap();
+        // 3). count the appearance of each word, excluding the banned words
+        for (String word : words) {
+            if (!bannedWords.contains(word))
+                wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
-        Set<String> bannedWords= Arrays.stream(banned).map(x->x.trim().toLowerCase(Locale.ROOT)).collect(Collectors.toSet());
-        for (int i = 0; i < array.length; i++) {
-            if(!bannedWords.contains(array[i])&&map.keySet().contains(array[i])){
-                map.put(array[i],map.get(array[i])+1);
-            }
-        }
-        Integer max=map.values().stream().toList().stream().max(Comparator.naturalOrder()).get();
-       Optional<Map.Entry<String,Integer>> optional=map.entrySet().stream().
-               max((Map.Entry<String,Integer>e1,Map.Entry<String,Integer>e2)->e1.getValue().compareTo(e2.getValue()));
-        return optional.get().getKey();
+
+        // 4). return the word with the highest frequency
+        return Collections.max(wordCount.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 }
