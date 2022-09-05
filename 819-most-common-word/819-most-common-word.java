@@ -18,7 +18,6 @@ class Solution {
                 map.put(array[i],map.get(array[i])+1);
             }
         }
-        Integer max=map.values().stream().toList().stream().max(Comparator.naturalOrder()).get();
        Optional<Map.Entry<String,Integer>> optional=map.entrySet().stream().
                max((Map.Entry<String,Integer>e1,Map.Entry<String,Integer>e2)->e1.getValue().compareTo(e2.getValue()));
         return optional.get().getKey();
