@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-
 class Solution {
     public String mostCommonWord(String paragraph, String[] banned) {
         paragraph=paragraph.replaceAll("[^a-zA-Z0-9]"," ");
@@ -18,8 +17,8 @@ class Solution {
                 map.put(array[i],map.get(array[i])+1);
             }
         }
-       Optional<Map.Entry<String,Integer>> optional=map.entrySet().stream().
-               max((Map.Entry<String,Integer>e1,Map.Entry<String,Integer>e2)->e1.getValue().compareTo(e2.getValue()));
+        Optional<Map.Entry<String,Integer>> optional=map.entrySet().stream().
+                max(Map.Entry.comparingByValue());
         return optional.get().getKey();
     }
 }
