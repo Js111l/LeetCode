@@ -1,4 +1,3 @@
-
 class NumArray {
 int [] array;
     public NumArray(int[] nums) {
@@ -6,11 +5,7 @@ int [] array;
     }
 
     public int sumRange(int left, int right) {
-        int sum=0;
-        for (int i = left; i <=right ; i++) {
-            sum+=array[i];
-        }
-        return sum;
+       return IntStream.rangeClosed(left,right).map(x->array[x]).sum();
     }
 }
 
