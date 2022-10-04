@@ -3,20 +3,19 @@ class Solution {
         int counter = 0;
         for (String word : words
         ) {
-            if(helper(word,allowed)){
+            int c=0;
+            for (int i = 0; i <word.length() ; i++) {
+                if(allowed.contains(String.valueOf(word.charAt(i)))){
+                    c++;
+                }
+            }
+            if(c==word.length()){
                 counter++;
             }
         }
         return counter;
     }
-    private boolean helper(String word, String allowed) {
-        for (int i = 0; i <word.length() ; i++) {
-            if(!allowed.contains(String.valueOf(word.charAt(i)))){
-                return false;
-            }
-        }
-    return true;
-    }
+
 }
 
 
