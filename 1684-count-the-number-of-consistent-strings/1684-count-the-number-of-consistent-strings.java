@@ -1,15 +1,21 @@
 class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
-        int counter = 0;
-        Set<Character> allowedSet = allowed.chars().mapToObj(x -> (char) x).collect(Collectors.toSet());
-        for (String word : words
-        ) {
-            Set<Character> set = word.chars().mapToObj(x -> (char) x).collect(Collectors.toSet());
-            if (set.stream().filter(x->allowedSet.contains(x)).collect(Collectors.toSet()).size()==set.size()) {
-                counter++;
-            }
+        Set<Character> allowedSet = new HashSet<>();
+        for(int i=0;i<allowed.length();i++){
+            allowedSet.add(allowed.charAt(i));
         }
-        return counter;
+        
+        int count = 0;
+        for(String word: words){
+            if(isConsistent(allowedSet, word)) count++;
+        }
+        
+        return count;
     }
-
-}
+    
+    boolean isConsistent(Set<Character> allowedSet, String word){
+        for (int i = 0; i < word.length(); i++){
+            if(!allowedSet.contains(word.charAt(i))) return false;   
+        }
+        return true;
+    }}
