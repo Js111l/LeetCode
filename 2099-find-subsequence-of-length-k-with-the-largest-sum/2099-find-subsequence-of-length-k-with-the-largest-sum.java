@@ -3,8 +3,6 @@ class Solution {
         if (nums.length == k) {
             return nums;
         } else {
-            //1.fint kth largest number
-            //2. delete anytghing that smaller than this number
             int[] nums2 = nums.clone();
             Arrays.sort(nums2);
             List<Integer> list = Arrays.stream(nums).mapToObj(x -> Integer.valueOf(x)).collect(Collectors.toList());
