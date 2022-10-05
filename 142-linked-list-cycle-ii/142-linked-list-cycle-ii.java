@@ -12,15 +12,18 @@
 
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        List<ListNode> list=new ArrayList<>();
-        while (head != null) {
-            if(!list.contains(head)){
-                list.add(head);
-                head = head.next;
-            }else {
-               return list.get(list.indexOf(head));
-            }
+        ListNode node = head;
+        HashMap<ListNode,Boolean> visited=new HashMap<>();
+        while (node != null) {
+            if(visited.get(node)==null){
+                visited.put(node,true);
+                                node=node.next;
+            }else 
+                return node;
+
         }
         return null;
     }
+
 }
+
