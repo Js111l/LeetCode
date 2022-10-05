@@ -21,7 +21,7 @@ public class Solution {
             if(visited.get(node)==null){ //if node hasn't been visited yet, add it to map.
                 visited.put(node,true);
                 node=node.next;
-            }else         //if node has been visited already -> there is a cycle. Return that node.
+            }else         //if node has been visited already -> there is a cycle. Return true.
                 return true;
         }
         return false;
