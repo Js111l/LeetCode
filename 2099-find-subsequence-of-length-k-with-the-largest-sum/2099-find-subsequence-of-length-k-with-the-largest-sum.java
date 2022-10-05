@@ -1,26 +1,18 @@
 class Solution {
     public int[] maxSubsequence(int[] nums, int k) {
-        if(nums.length==k){
+        if (nums.length == k) {
             return nums;
-        }else {
-            int[] nums2=nums.clone();
+        } else {
+            //1.fint kth largest number
+            //2. delete anytghing that smaller than this number
+            int[] nums2 = nums.clone();
             Arrays.sort(nums2);
-             for (Integer mn:nums
-                 ) {
-                System.out.println(mn);
-            }
-            List<Integer> numbers=new ArrayList<>();
-            for (int i = 0; i < nums2.length-k; i++) {
-                numbers.add(nums2[i]);
-            }
-            List<Integer> list=Arrays.stream(nums).mapToObj(x->Integer.valueOf(x)).collect(Collectors.toList());
-            for (Integer num:numbers
-                 ) {
-                list.remove(num);
+            List<Integer> list = Arrays.stream(nums).mapToObj(x -> Integer.valueOf(x)).collect(Collectors.toList());
+            for (int i = 0; i < nums.length-k; i++) {
+                list.remove(Integer.valueOf(nums2[i]));
+
             }
             return list.stream().mapToInt(x->x).toArray();
         }
     }
 }
-
-
