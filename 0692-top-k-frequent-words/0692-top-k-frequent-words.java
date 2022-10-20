@@ -22,12 +22,6 @@ class Solution {
                 return -1;
             }
         };
-
-        Set<String> priorityQueue=new TreeSet<>(comparator);
-        for (String w : words
-        ) {
-            priorityQueue.add(w);
-        }
-        return priorityQueue.stream().limit(k).toList();
+        return Arrays.stream(words).sorted(comparator).distinct().limit(k).collect(Collectors.toList());
     }
 }
