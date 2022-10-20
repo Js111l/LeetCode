@@ -2,10 +2,7 @@ class Solution {
     public List<String> topKFrequent(String[] words, int k) {
         HashMap<String,Integer> hashMap=new HashMap<>();
         for (String word:words) {
-            if(hashMap.containsKey(word)){
-                hashMap.put(word,hashMap.get(word)+1);
-            }else
-                hashMap.put(word,1);
+            hashMap.put(word,hashMap.getOrDefault(word,0)+1);
         }
         Comparator<String> comparator = new Comparator<String>() {
             @Override
