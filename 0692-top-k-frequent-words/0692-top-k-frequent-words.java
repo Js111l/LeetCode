@@ -16,11 +16,11 @@ class Solution {
             }
         };
 
-        Set<String> priorityQueue=new TreeSet<>(comparator);
+        Set<String> set=new TreeSet<>(comparator);
         for (String w : words
         ) {
-            priorityQueue.add(w);
+            set.add(w);
         }
-        return priorityQueue.stream().limit(k).toList();
+        return set.stream().limit(k).toList();
     }
 }
