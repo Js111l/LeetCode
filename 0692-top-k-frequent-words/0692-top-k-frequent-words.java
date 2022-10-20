@@ -1,37 +1,23 @@
 class Solution {
-  public List<String> topKFrequent(String[] words, int k) {
-        
-        // map hold the word: counts
-        HashMap<String, Integer> map = new HashMap();
-        
-        // sort the map by frequency high->low order, sort words lexi order
-        PriorityQueue<Map.Entry<String, Integer>> heap = new PriorityQueue<>(
-            (a,b)->{
-                if(a.getValue() != b.getValue())
-                    return a.getValue().compareTo(b.getValue());
-                return -a.getKey().compareTo(b.getKey());
+    public List<String> topKFrequent(String[] words, int k) {
+        List<String> stringList = List.of(words);
+        Comparator<String>comparator=new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int freqO1 = Collections.frequency(List.of(words), o1);
+                int fregO2 = Collections.frequency(List.of(words), o2);
+
+                if (freqO1 != fregO2) {
+                    return fregO2 - freqO1;
+                }
+                if (freqO1 == freqO1) {
+                    return o1.compareTo(o2);
+                }
+                return -1;
             }
-        );
-        
-        // fill the map
-        for(String word: words){
-            map.merge(word, 1, Integer::sum);
-        }
-        
-        // put into heap
-        for(Map.Entry<String, Integer> entry: map.entrySet()){
-            heap.offer(entry);
-            if(heap.size() > k)
-                heap.poll();
-        }
-        
-        // pop out the answer
-        List<String> ans = new ArrayList();
-        while(heap.size() > 0)
-            ans.add(heap.poll().getKey());
-        
-        // check the order
-        Collections.reverse(ans);
-        return ans;
+        };
+        return Arrays.stream(words).
+                sorted(Comparator.comparing(x -> Collections.frequency(stringList, x))).
+                distinct().sorted(comparator).limit(k).collect(Collectors.toList());
     }
 }
