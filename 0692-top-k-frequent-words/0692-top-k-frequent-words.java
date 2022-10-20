@@ -1,7 +1,6 @@
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        List<String> stringList = List.of(words);
-        Comparator<String>comparator=new Comparator<String>() {
+        Comparator<String> comparator = new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 int freqO1 = Collections.frequency(List.of(words), o1);
@@ -10,14 +9,19 @@ class Solution {
                 if (freqO1 != fregO2) {
                     return fregO2 - freqO1;
                 }
-                if (freqO1 == freqO1) {
+                if (freqO1 == fregO2) {
                     return o1.compareTo(o2);
                 }
                 return -1;
             }
         };
-        return Arrays.stream(words).
-                sorted(Comparator.comparing(x -> Collections.frequency(stringList, x))).
-                distinct().sorted(comparator).limit(k).collect(Collectors.toList());
+        List<String> priorityQueue=new ArrayList<>();
+        for (String w : words
+        ) {
+            priorityQueue.add(w);
+        }
+        Collections.sort(priorityQueue,comparator);
+        List<String> stringList =priorityQueue.stream().distinct().collect(Collectors.toList());
+        return stringList.stream().limit(k).collect(Collectors.toList());
     }
 }
