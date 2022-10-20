@@ -19,6 +19,7 @@ class Solution {
                 return -1;
             }
         };
-        return Arrays.stream(words).sorted(comparator).distinct().limit(k).collect(Collectors.toList());
+        return hashMap.keySet().stream().sorted(comparator).limit(k).collect(Collectors.toList());
     }
 }
+
