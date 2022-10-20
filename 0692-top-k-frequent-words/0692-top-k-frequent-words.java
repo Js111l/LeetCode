@@ -15,13 +15,12 @@ class Solution {
                 return -1;
             }
         };
-        List<String> priorityQueue=new ArrayList<>();
+
+        Set<String> priorityQueue=new TreeSet<>(comparator);
         for (String w : words
         ) {
             priorityQueue.add(w);
         }
-        Collections.sort(priorityQueue,comparator);
-        List<String> stringList =priorityQueue.stream().distinct().collect(Collectors.toList());
-        return stringList.stream().limit(k).collect(Collectors.toList());
+        return priorityQueue.stream().limit(k).toList();
     }
 }
