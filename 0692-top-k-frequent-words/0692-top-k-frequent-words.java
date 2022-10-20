@@ -10,7 +10,6 @@ class Solution {
         Comparator<String> comparator = new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                List<String> list=List.of(words);
                 int freqO1 = hashMap.get(o1);
                 int fregO2 = hashMap.get(o2);
 
