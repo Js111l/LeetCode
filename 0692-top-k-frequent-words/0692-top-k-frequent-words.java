@@ -3,8 +3,9 @@ class Solution {
         Comparator<String> comparator = new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                int freqO1 = Collections.frequency(List.of(words), o1);
-                int fregO2 = Collections.frequency(List.of(words), o2);
+                List<String> list=List.of(words);
+                int freqO1 = Collections.frequency(list, o1);
+                int fregO2 = Collections.frequency(list, o2);
 
                 if (freqO1 != fregO2) {
                     return fregO2 - freqO1;
