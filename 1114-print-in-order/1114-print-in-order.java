@@ -1,35 +1,36 @@
 class Foo {
+    private Semaphore semaphore;
 
     public Foo() {
-
+        semaphore = new Semaphore(1);
     }
 
-    private volatile AtomicInteger integer = new AtomicInteger(1);
 
     public synchronized void first(Runnable printFirst) throws InterruptedException {
-        while (integer.get()!=1){
+        while (!semaphore.tryAcquire(1)) {
             wait();
         }
-        integer.incrementAndGet();
         printFirst.run();
+        semaphore.release(2);
         notifyAll();
     }
 
     public synchronized void second(Runnable printSecond) throws InterruptedException {
-        while (integer.get() != 2) {
+        while (!semaphore.tryAcquire(2)) {
             wait();
         }
-        integer.incrementAndGet();
         printSecond.run();
+        semaphore.release(3);
         notifyAll();
     }
 
 
     public synchronized void third(Runnable printThird) throws InterruptedException {
-        while (integer.get() != 3) {
+        while (!semaphore.tryAcquire(3)){
             wait();
         }
         printThird.run();
         notifyAll();
     }
 }
+
