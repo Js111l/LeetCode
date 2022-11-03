@@ -29,7 +29,6 @@ class ZeroEvenOdd {
                     state.set(1);
                     this.notifyAll();
                 }
-                this.notifyAll();
             }
         }
     }
