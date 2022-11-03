@@ -15,12 +15,15 @@
  */
 
 class Solution {
-    List<String> set = new LinkedList<>();
-
+    List<String> list= new LinkedList<>();
     public int sumNumbers(TreeNode root) {
         helper(root, new StringBuilder());
-        set.forEach(x -> System.out.println(x));
-        return set.stream().map(x -> Integer.valueOf(x)).reduce(0, (x, y) -> x + y);
+        int sum=0;
+        for (String str:list
+             ) {
+            sum+=Integer.valueOf(str);
+        }
+        return sum;
     }
 
     private void helper(TreeNode root, StringBuilder value) {
@@ -34,7 +37,7 @@ class Solution {
             helper(root.right, new StringBuilder(value));
         }
         if (root.left == null && root.right == null) {
-          set.add(new StringBuilder(value).toString());
+            list.add(new StringBuilder(value).toString());
             return;
         }
     }
